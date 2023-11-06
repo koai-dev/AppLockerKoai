@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.momentolabs.app.security.applocker">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -25,14 +28,14 @@
         android:name=".AppLockerApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="App Đã nâng cấp"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".ui.main.MainActivity"
             android:excludeFromRecents="true"
-            android:label="@string/app_name"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -51,41 +54,41 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.newpattern.CreateNewPatternActivity" />
+        <activity android:name=".ui.newpattern.CreateNewPatternActivity"  android:exported="false"/>
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.overlay.activity.OverlayValidationActivity"
             android:excludeFromRecents="true" />
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.background.BackgroundsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.browser.BrowserActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.vault.VaultActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.callblocker.CallBlockerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
+        <activity android:exported="false"
             android:name=".ui.intruders.IntrudersPhotosActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".service.AppLockerService" />
+        <service android:name=".service.AppLockerService" android:exported="false"/>
 
-        <receiver android:name=".service.receiver.BootCompleteReceiver">
+        <receiver android:name=".service.receiver.BootCompleteReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".ui.callblocker.service.CallReceiver">
+        <receiver android:name=".ui.callblocker.service.CallReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
@@ -94,7 +97,7 @@
             </intent-filter>
         </receiver>
 
-        <service
+        <service android:exported="true"
             android:name=".ui.callblocker.service.CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">
             <meta-data
@@ -105,7 +108,7 @@
             </intent-filter>
         </service>
 
-        <service
+        <service android:exported="true"
             android:name=".ui.callblocker.service.CallBlockerScreeningService"
             android:permission="android.permission.BIND_SCREENING_SERVICE">
             <intent-filter>
@@ -117,9 +120,7 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <meta-data
-            android:name="com.bugsnag.android.API_KEY"
-            android:value="ebbfbab41a7d4b9865f3baefba6a24ce" />
+
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
